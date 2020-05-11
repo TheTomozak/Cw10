@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cw10.DTOs;
+using Cw10.DTOs.Requests;
 using Cw10.Models;
 using Cw10.Services;
 using Microsoft.AspNetCore.Http;
@@ -29,5 +31,45 @@ namespace Cw10.Controllers
         {
             return Ok(_server.GetStudents());
         }
+
+        [HttpPost]
+        public IActionResult ModifyStudent(UpdateStudentsRequest updateStudentsRequest)
+        {
+            HelperRequests helper = _server.UpdateStudents(updateStudentsRequest);
+
+            switch (helper.Number)
+            {
+                case 0:
+                    return BadRequest("Student with this index not exists");
+                default:
+                    return Ok("Student modify");
+
+            }
+
+            
+        }
+
+
+        [HttpDelete]
+
+        public IActionResult RemoveStudent(DeleteStudentRequest request)
+        {
+
+            HelperRequests helperRequests = _server.DeleteStudent(request);
+
+
+            switch (helperRequests.Number)
+            {
+                case 0:
+                    return BadRequest("Student with this index not exists");
+                default:
+                    return Ok("Student remove");
+
+            }
+
+            
+        }
+
+
     }
 }
