@@ -12,15 +12,15 @@ using Microsoft.Extensions.Configuration;
 
 namespace Cw10.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/students")]
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentDbService _server;
+        private readonly IDbService _server;
 
         public IConfiguration Configuration { get; set; }
 
-        public StudentsController(IStudentDbService context, IConfiguration configuration)
+        public StudentsController(IDbService context, IConfiguration configuration)
         {
             _server = context;
             Configuration = configuration;
@@ -43,18 +43,13 @@ namespace Cw10.Controllers
                     return BadRequest("Student with this index not exists");
                 default:
                     return Ok("Student modify");
-
             }
-
-            
         }
 
 
         [HttpDelete]
-
         public IActionResult RemoveStudent(DeleteStudentRequest request)
         {
-
             HelperRequests helperRequests = _server.DeleteStudent(request);
 
 
@@ -64,12 +59,7 @@ namespace Cw10.Controllers
                     return BadRequest("Student with this index not exists");
                 default:
                     return Ok("Student remove");
-
             }
-
-            
         }
-
-
     }
 }

@@ -8,12 +8,15 @@ using Cw10.Models;
 
 namespace Cw10.Services
 {
-   public interface IStudentDbService
+   public interface IDbService
    {
        public IEnumerable<Student> GetStudents();
 
        public HelperRequests DeleteStudent(DeleteStudentRequest request);
 
        public HelperRequests UpdateStudents(UpdateStudentsRequest request);
-   }
+
+       HelperRequests EnrollStudent(EnrollStudentRequest request);
+       void PromoteStudent(EnrollPromotionsRequest request);
+    }
 }

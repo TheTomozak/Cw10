@@ -28,7 +28,7 @@ namespace Cw10
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddScoped<IStudentDbService, EfStudentDbService>();
+            services.AddScoped<IDbService, EfSqlDbService>();
             services.AddDbContext<s18969Context>(options =>
             {
                 options.UseSqlServer("Data Source=db-mssql;Initial Catalog=s18969;Integrated Security=True");
